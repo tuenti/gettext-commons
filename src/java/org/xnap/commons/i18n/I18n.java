@@ -255,7 +255,7 @@ public class I18n {
 	 */
 	public final String tr(String text, Object[] objects)
 	{
-		return MessageFormat.format(tr(text), objects);
+		return formatMessage(tr(text), objects);
 	}
 
 	/**
@@ -324,6 +324,12 @@ public class I18n {
 	/**
 	 * Returns the plural form for <code>n</code> of the translation of
 	 * <code>text</code>.
+	 * <p>
+	 * Occurrences of {number} placeholders in text are replaced by
+	 * <code>objects</code>.
+	 * <p>
+	 * Invokes
+	 * {@link MessageFormat#format(java.lang.String, java.lang.Object[])}.
 	 * 
 	 * @param text
 	 *            the key string to be translated.
@@ -332,13 +338,13 @@ public class I18n {
 	 * @param n
 	 *            value that determines the plural form
 	 * @param objects
-	 *            object args to be formatted and substituted.
+	 *            arguments to <code>MessageFormat.format()</code>
 	 * @return the translated text
 	 * @since 0.9
 	 */
 	public final String trn(String text, String pluralText, long n, Object[] objects)
 	{
-		return MessageFormat.format(trn(text, pluralText, n), objects);
+		return formatMessage(trn(text, pluralText, n), objects);
 	}
 
 	/**
@@ -525,6 +531,12 @@ public class I18n {
 	/**
 	 * Returns the plural form for <code>n</code> of the translation of
 	 * <code>text</code>.
+	 * <p>
+	 * Occurrences of {number} placeholders in text are replaced by
+	 * <code>objects</code>.
+	 * <p>
+	 * Invokes
+	 * {@link MessageFormat#format(java.lang.String, java.lang.Object[])}.
 	 * 
 	 * @param context
 	 * 			  the context of the message to disambiguate it when translating
@@ -535,12 +547,12 @@ public class I18n {
 	 * @param n
 	 *            value that determines the plural form
 	 * @param objects
-	 *            object args to be formatted and substituted.
+	 *            arguments to <code>MessageFormat.format()</code>
 	 * @return the translated text
 	 * @since 0.9
 	 */
 	public final String trnc(String context, String singularText, String pluralText, long n, Object[] objects) {
-		return MessageFormat.format(trnc(context, singularText, pluralText, n), objects);
+		return formatMessage(trnc(context, singularText, pluralText, n), objects);
 	}
 
 	/**
@@ -551,7 +563,7 @@ public class I18n {
 	 * @since 0.9.5
 	 */
 	public final String trnc(String comment, String singularText, String pluralText, long n, Object obj) {
-		return MessageFormat.format(trnc(comment, singularText, pluralText, n), new Object[] { obj });
+		return trnc(comment, singularText, pluralText, n, new Object[] { obj });
 	}
 	
 	/**
@@ -562,7 +574,7 @@ public class I18n {
 	 * @since 0.9.5
 	 */
 	public final String trnc(String comment, String singularText, String pluralText, long n, Object obj1, Object obj2) {
-		return MessageFormat.format(trnc(comment, singularText, pluralText, n), new Object[] { obj1, obj2 });
+		return trnc(comment, singularText, pluralText, n, new Object[] { obj1, obj2 });
 	}
 	
 	/**
@@ -573,7 +585,7 @@ public class I18n {
 	 * @since 0.9.5
 	 */
 	public final String trnc(String comment, String singularText, String pluralText, long n, Object obj1, Object obj2, Object obj3) {
-		return MessageFormat.format(trnc(comment, singularText, pluralText, n), new Object[] { obj1, obj2, obj3 });
+		return trnc(comment, singularText, pluralText, n, new Object[] { obj1, obj2, obj3 });
 	}
 	
 	/**
@@ -584,7 +596,15 @@ public class I18n {
 	 * @since 0.9.5
 	 */
 	public final String trnc(String comment, String singularText, String pluralText, long n, Object obj1, Object obj2, Object obj3, Object obj4) {
-		return MessageFormat.format(trnc(comment, singularText, pluralText, n), new Object[] { obj1, obj2, obj3, obj4 });
+		return trnc(comment, singularText, pluralText, n, new Object[] { obj1, obj2, obj3, obj4 });
 	}
-	
+
+	/**
+	 * Convenience method that invokes {@link MessageFormat#format(java.lang.String, java.lang.Object[])} escaping
+	 * the single quotes to avoid loosing them.
+	 */
+	private String formatMessage(String message, Object[] objects) {
+		return MessageFormat.format(message.replace("'", "''"), objects);
+	}
+
 }
