@@ -196,6 +196,38 @@ public class I18nTest extends TestCase {
 		assertEquals("It's friday! Yes it's friday!", i18nEN.trn("It's {0}! Yes it's {0}!", "Foos", 1, "friday"));
 	}
 
+	public void testTrnc()
+	{
+		assertEquals("Foo", i18nEN.trnc("ctx", "Foo", "{0} Bars", 1));
+		assertEquals("{0} Bars", i18nEN.trnc("ctx", "Foo", "{0} Bars", 2));
+		assertEquals("2 Bars", i18nEN.trnc("ctx", "Foo", "{0} Bars", 2, new Integer(2)));
+	}
+
+	public void testTrnc1()
+	{
+		assertEquals("Foo foo ", i18nEN.trnc("ctx", "Foo {0} ", "Foos {0}", 1, "foo"));
+	}
+
+	public void testTrnc2()
+	{
+		assertEquals("Foo bar foo", i18nEN.trnc("ctx", "Foo {1} {0}", "Foos", 1, "foo", "bar"));
+		assertEquals("Foo foo bar", i18nEN.trnc("ctx", "Foo {0} {1}", "Foos", 1, "foo", "bar"));
+	}
+
+	public void testTrnc3()
+	{
+		assertEquals("Foo bar baz foo", i18nEN.trnc("ctx", "Foo {1} {2} {0}", "Foos", 1, "foo", "bar", "baz"));
+		assertEquals("Foo foo bar baz", i18nEN.trnc("ctx", "Foo {0} {1} {2}", "Foos", 1, "foo", "bar", "baz"));
+	}
+
+	public void testTrnc4()
+	{
+		assertEquals("Foo bar baz boing foo", i18nEN
+				.trnc("ctx", "Foo {1} {2} {3} {0}", "Foos", 1, "foo", "bar", "baz", "boing"));
+		assertEquals("Foo foo bar baz boing", i18nEN
+				.trnc("ctx", "Foo {0} {1} {2} {3}", "Foos", 1, "foo", "bar", "baz", "boing"));
+	}
+
 	public void testSetEmptyResources()
 	{
 		// this should load the empty resource bundle
