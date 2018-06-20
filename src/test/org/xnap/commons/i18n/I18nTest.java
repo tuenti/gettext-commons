@@ -105,6 +105,37 @@ public class I18nTest extends TestCase {
 		assertEquals("Chatten", i18nDE.trc("verb", "chat"));
 	}
 
+	public void testTrc1()
+	{
+		assertEquals("Foo foo ", i18nEN.trc("ctx", "Foo {0} ", "foo"));
+	}
+
+	public void testTrc2()
+	{
+		assertEquals("Foo bar foo", i18nEN.trc("ctx", "Foo {1} {0}", "foo", "bar"));
+		assertEquals("Foo foo bar", i18nEN.trc("ctx", "Foo {0} {1}", "foo", "bar"));
+	}
+
+	public void testTrc3()
+	{
+		assertEquals("Foo bar baz foo", i18nEN.trc("ctx", "Foo {1} {2} {0}", "foo", "bar", "baz"));
+		assertEquals("Foo foo bar baz", i18nEN.trc("ctx", "Foo {0} {1} {2}", "foo", "bar", "baz"));
+	}
+
+	public void testTrc4()
+	{
+		assertEquals("Foo bar baz boing foo", i18nEN
+				.trc("ctx", "Foo {1} {2} {3} {0}", "foo", "bar", "baz", "boing"));
+		assertEquals("Foo foo bar baz boing", i18nEN
+				.trc("ctx", "Foo {0} {1} {2} {3}", "foo", "bar", "baz", "boing"));
+	}
+
+	public void testTrcApostropheWithPlaceholder()
+	{
+		assertEquals("It's friday!", i18nEN.trc("ctx", "It's {0}!", "friday"));
+		assertEquals("It's friday! Yes it's friday!", i18nEN.trc("ctx", "It's {0}! Yes it's {0}!", "friday"));
+	}
+
 	public void testSetLocale()
 	{
 		I18n i18n = new I18n(new MockResourceBundle());
@@ -226,6 +257,12 @@ public class I18nTest extends TestCase {
 				.trnc("ctx", "Foo {1} {2} {3} {0}", "Foos", 1, "foo", "bar", "baz", "boing"));
 		assertEquals("Foo foo bar baz boing", i18nEN
 				.trnc("ctx", "Foo {0} {1} {2} {3}", "Foos", 1, "foo", "bar", "baz", "boing"));
+	}
+
+	public void testTrncApostropheWithPlaceholder()
+	{
+		assertEquals("It's friday!", i18nEN.trnc("ctx", "It's {0}!", "Foos", 1, "friday"));
+		assertEquals("It's friday! Yes it's friday!", i18nEN.trnc("ctx", "It's {0}! Yes it's {0}!", "Foos", 1, "friday"));
 	}
 
 	public void testSetEmptyResources()

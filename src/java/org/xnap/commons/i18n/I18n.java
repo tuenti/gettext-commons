@@ -503,6 +503,72 @@ public class I18n {
 			return translated == key ? text : translated;
 		}
 	}
+
+	/**
+	 * Disambiguates translation keys.
+	 * <p>
+	 * Occurrences of {number} placeholders in text are replaced by
+	 * <code>objects</code>.
+	 * <p>
+	 * Invokes
+	 * {@link MessageFormat#format(java.lang.String, java.lang.Object[])}.
+	 * 
+	 * @param context
+	 * 			  the context of the message to disambiguate it when translating
+	 * @param text
+	 *            the ambiguous key message in the source locale
+	 * @param objects
+	 *            arguments to <code>MessageFormat.format()</code>
+	 * @return the translated text
+	 * @since 0.9.9
+	 */
+	public final String trc(String context, String text, Object[] objects) {
+		return formatMessage(trc(context, text), objects);
+	}
+
+	/**
+	 * Overloaded method that invokes
+	 * {@link #trc(String, String, Object[])} passing <code>obj</code>
+	 * arguments as an array.
+	 * 
+	 * @since 0.9.9
+	 */
+	public final String trc(String context, String text, Object obj) {
+		return trc(context, text, new Object[] { obj });
+	}
+
+	/**
+	 * Overloaded method that invokes
+	 * {@link #trc(String, String, Object[])} passing <code>obj1</code> and <code>obj2</code>
+	 * arguments as an array.
+	 * 
+	 * @since 0.9.9
+	 */
+	public final String trc(String context, String text, Object obj1, Object obj2) {
+		return trc(context, text, new Object[] { obj1, obj2 });
+	}
+
+	/**
+	 * Overloaded method that invokes
+	 * {@link #trc(String, String, Object[])} passing <code>obj1</code>, <code>obj2</code> and <code>obj3</code>
+	 * arguments as an array.
+	 * 
+	 * @since 0.9.9
+	 */
+	public final String trc(String context, String text, Object obj1, Object obj2, Object obj3) {
+		return trc(context, text, new Object[] { obj1, obj2, obj3 });
+	}
+
+	/**
+	 * Overloaded method that invokes
+	 * {@link #trc(String, String, Object[])} passing <code>obj1</code>, <code>obj2</code>, <code>obj3</code> and <code>obj4</code>
+	 * arguments as an array.
+	 * 
+	 * @since 0.9.9
+	 */
+	public final String trc(String context, String text, Object obj1, Object obj2, Object obj3, Object obj4) {
+		return trc(context, text, new Object[] { obj1, obj2, obj3, obj4 });
+	}
 	
 	/** 
 	 * Returns the plural form for <code>n</code> of the translation of
