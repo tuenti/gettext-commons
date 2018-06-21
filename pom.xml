@@ -3,7 +3,7 @@
     <groupId>com.googlecode.gettext-commons</groupId>
     <artifactId>gettext-commons</artifactId>
     <packaging>jar</packaging>
-    <version>0.10.0-tuenti1</version>
+    <version>0.10.1-tuenti1-SNAPSHOT</version>
     <name>Gettext Commons</name>
     <url>http://code.google.com/p/gettext-commons/</url>
     <description>
