@@ -169,20 +169,6 @@ public class I18nTest extends TestCase {
 		catch (NullPointerException npe) {}
 	}
 
-	public void testSetSourceCodeLocale()
-	{
-		i18nDE.setSourceCodeLocale(Locale.GERMAN);
-		assertEquals("chat", i18nDE.trc("verb", "chat"));
-		i18nDE.setSourceCodeLocale(Locale.ENGLISH);
-		assertEquals("Chatten", i18nDE.trc("verb", "chat"));
-
-		try {
-			i18nDE.setSourceCodeLocale(null);
-			fail("null pointer exception expected");
-		}
-		catch (NullPointerException npe) {}
-	}
-
 	public void testTrnEN()
 	{
 		assertEquals("Foo", i18nEN.trn("Foo", "{0} Bars", 1));

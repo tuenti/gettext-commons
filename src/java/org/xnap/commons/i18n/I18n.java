@@ -48,13 +48,6 @@ public class I18n {
 	 */
 	private volatile ResourceBundle bundle;
 
-	/**
-	 * The locale of the strings used in the source code.
-	 * 
-	 * @see #trc(String, String)
-	 */
-	private volatile Locale sourceCodeLocale = Locale.ENGLISH;
-
 	private String baseName;
 
 	private ClassLoader loader;
@@ -192,28 +185,6 @@ public class I18n {
 			this.locale = locale;
 		}
 		return false;
-	}
-
-	/**
-	 * Sets the locale of the text in the source code.
-	 * <p>
-	 * Only languages that have one singular and one plural form can be used as
-	 * source code locales, since {@link #trn(String, String, long)} takes
-	 * exactly these two forms as parameters.
-	 * 
-	 * @param locale
-	 *            the locale
-	 * @throws NullPointerException
-	 *             if <code>locale</code> is <code>null</code>
-	 * @see #trc(String, String)
-	 * @since 0.9
-	 */
-	public void setSourceCodeLocale(Locale locale)
-	{
-		if (locale == null) {
-			throw new NullPointerException("locale must not be null");
-		}
-		sourceCodeLocale = locale;
 	}
 
 	/**
@@ -494,14 +465,10 @@ public class I18n {
 	 */
 	public final String trc(String context, String text)
 	{
-		if (sourceCodeLocale.equals(getResources().getLocale())) { 
-			return text;
-		} else {
-			String key = context + CONTEXT_GLUE + text; 
-			String translated = tr(key);
-			// if no translation was found return text in source locale
-			return translated == key ? text : translated;
-		}
+		String key = context + CONTEXT_GLUE + text; 
+		String translated = tr(key);
+		// if no translation was found return text in source locale
+		return translated == key ? text : translated;
 	}
 
 	/**
